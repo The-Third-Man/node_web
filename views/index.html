@@ -1,4 +1,4 @@
-<!-- 
+<!--
  index.html - Ethereum Wallet
  Author : Soto Jang (sotolabedu@gmail.com)
  Copyright (c) Sunstar Since 2015. All Rights Reserved. See LICENSE file.
@@ -34,13 +34,13 @@
 				console.log("Ropsten Ethereum API version : ", version);
 				console.log("web3: ", web3);
 			}
-			
+
 			let qrcode = new QRCode(document.getElementById("qrcode"), {
 				width : 250,
 				height : 250
 			});
-			
-			function makeCode () {		
+
+			function makeCode () {
 				let elText = document.getElementById("fromaddress");
 
 				if (!elText.value) {
@@ -49,20 +49,20 @@
 					return;
 				}
 				qrcode.makeCode(elText.value);
-			} 
-						
+			}
+
 			$('#qrcodeBtn').on('click', function(){
 				if (DEBUG) console.log("qrcodeBtn...... ");
-					makeCode();  	 
+					makeCode();
 			}) // end of txbuilder
-			
+
 			$('#send').on('click', async function () {
-			
+
 				let fromaddress = $("#fromaddress").val();
 				let toaddress = $("#toaddress").val();
 				let amount = $("#sendcoin").val();
 				let myPrivateKey = $("#mypassword").val();
-				
+
 				const privateKey = Buffer.from(myPrivateKey, 'hex');
 				if (DEBUG) console.log("privateKey: ", privateKey);
 
@@ -90,18 +90,18 @@
 				  })
 				})  // end of txbuilder
 			})
-			
+
 			$('#getBalance').on('click', async function () {
-			
+
 				let fromaddress = $("#fromaddress").val();
-				
+
 				let getbalance = await web3.eth.getBalance(fromaddress);	//	잔액 조회
 				let balance = web3.utils.fromWei(getbalance, "ether")
 
 				if (DEBUG) console.log("balance : ", balance + " ETH");
 				$('#balance').text(" balance: " + balance + " ETH");
-				
-				
+
+
 			})
 
 			$('#newAccount').on('click', async function () {
@@ -144,9 +144,9 @@
 		<h5>송신처 <input id="fromaddress" size="45" value="0x8289eBFEAc2C4Aa058207c1C739e1D93d6552a4C" placeholder="보내는 계좌번호"></input> </h5>
 		<h5>수신처 <input id="toaddress" size="45" placeholder="받는 계좌번호"></input> </h5>
 		<h5>보내는 코인 갯수 <input id="sendcoin" size="45" placeholder="보내는 코인 갯수"></input> </h5>
-		<h5>비밀번호 <input type="password" id="mypassword" size="45" value="e47292f49a52c9e28f74bdd55a5272c1e789cc35525c296d3fe94f93352fee00" placeholder="비밀번호"></input> </h5>
+		<h5>비밀번호 <input type="password" id="mypassword" size="45" placeholder="비밀번호"></input> </h5>
 	</div>
-	
+
 	<br>
 	<br>
 	<div class="container " role="main">
